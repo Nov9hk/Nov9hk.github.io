@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代購計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>代購計算器</h2>
+    <label for="price">商品價錢 (KRW):</label>
+    <input type="number" id="price" placeholder="輸入商品價錢" required>
+    
+    <label for="weight">重量 (KG):</label>
+    <input type="number" id="weight" placeholder="輸入重量" required>
+    
+    <label for="exchangeRate">實時匯率 (KRW to HKD):</label>
+    <input type="number" id="exchangeRate" value="0.005" step="0.001" required>
+
+    <button id="calculateBtn">計算價格 (HKD)</button>
+    
+    <h3>結果:</h3>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const price = parseFloat(document.getElementById('price').value);
+            const weight = Math.max(0.5, Math.ceil(parseFloat(document.getElementById('weight').value) * 2) / 2); // 向上取整至0.5KG
+            const exchangeRate = parseFloat(document.getElementById('exchangeRate').value); // 用戶輸入匯率
+            const handlingFee = 0.25; // 25% 代購費
+            const shippingCostPerKG = 22.5; // 每0.5KG的運費
+            const shippingCost = Math.ceil(weight / 0.5) * shippingCostPerKG; // 根據重量計算運費
+            
+            // 計算總費用
+            const totalCost = (price * exchangeRate * (1 + handlingFee) + shippingCost).toFixed(2);
+            document.getElementById('result').innerText = totalCost + ' HKD';
+        });
+    </script>
+</body>
+</html>
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+
+</script>
+</body>
+</html>
